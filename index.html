@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>대성기획인테리어 - 당신의 공간을 특별하게</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* 헤더 */
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-svg {
+            width: 50px;
+            height: 50px;
+        }
+
+        .company-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffd700;
+        }
+
+        /* 히어로 섹션 */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 150px 2rem 100px;
+            margin-top: 70px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1.2s ease;
+        }
+
+        .cta-button {
+            background: #ffd700;
+            color: #1e3c72;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* 서비스 섹션 */
+        .services {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #1e3c72;
+            margin-bottom: 3rem;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            color: #2a5298;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        /* 프로세스 섹션 */
+        .process {
+            background: #f8f9fa;
+            padding: 80px 2rem;
+        }
+
+        .process-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .process-step {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+
+        /* 상담 사례 */
+        .consultation {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 0 2rem;
+        }
+
+        .consultation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .consultation-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .consultation-placeholder {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .consultation-content {
+            padding: 1.5rem;
+        }
+
+        .consultation-content h3 {
+            color: #2a5298;
+            margin-bottom: 0.5rem;
+        }
+
+        /* 견적 문의 섹션 */
+        .contact {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 80px 2rem;
+            text-align: center;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 3rem auto 0;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #2a5298;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-button {
+            background: #ffd700;
+            color: #1e3c72;
+            padding: 15px 50px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+            width: 100%;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* 푸터 */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* 애니메이션 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 반응형 */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .company-name {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 -->
+    <header>
+        <nav>
+            <div class="logo-container">
+                <!-- DS + 집 모양 로고 SVG -->
+                <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <!-- 집 외곽선 -->
+                    <path d="M50 15 L85 40 L85 80 L15 80 L15 40 Z" 
+                          fill="none" 
+                          stroke="#FFD700" 
+                          stroke-width="3"/>
+                    <!-- 집 지붕 -->
+                    <path d="M50 15 L85 40 L15 40 Z" 
+                          fill="#FFD700" 
+                          opacity="0.3"/>
+                    <!-- DS 텍스트 -->
+                    <text x="50" y="60" 
+                          font-family="Arial, sans-serif" 
+                          font-size="24" 
+                          font-weight="bold" 
+                          fill="white" 
+                          text-anchor="middle">DS</text>
+                </svg>
+                <span class="company-name">대성기획인테리어</span>
+            </div>
+            <ul>
+                <li><a href="#home">홈</a></li>
+                <li><a href="#services">서비스</a></li>
+                <li><a href="#consultation">상담사례</a></li>
+                <li><a href="#contact">견적문의</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 히어로 섹션 -->
+    <section id="home" class="hero">
+        <h1>당신의 공간을 특별하게 만듭니다</h1>
+        <p>대성기획인테리어와 함께 꿈꾸던 공간을 현실로</p>
+        <a href="#contact" class="cta-button">무료 상담 신청</a>
+    </section>
+
+    <!-- 서비스 섹션 -->
+    <section id="services" class="services">
+        <h2 class="section-title">우리의 서비스</h2>
+        <div class="service-grid">
+            <div class="service-card">
+                <div class="service-icon">🏠</div>
+                <h3>주거 공간 인테리어</h3>
+                <p>아파트, 빌라, 주택 등 모든 주거 공간의 리모델링 및 인테리어를 전문적으로 진행합니다.</p>
+                <ul style="margin-top: 1rem; text-align: left; padding-left: 1.5rem;">
+                    <li>아파트 전체/부분 리모델링</li>
+                    <li>주방, 욕실 특화 시공</li>
+                    <li>맞춤형 가구 제작</li>
+                    <li>스타일별 인테리어 컨설팅</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🏢</div>
+                <h3>상업 공간 인테리어</h3>
+                <p>사무실, 매장, 카페 등 상업 공간의 브랜드 가치를 높이는 인테리어를 제공합니다.</p>
+                <ul style="margin-top: 1rem; text-align: left; padding-left: 1.5rem;">
+                    <li>사무실 공간 설계</li>
+                    <li>카페/레스토랑 인테리어</li>
+                    <li>매장 디스플레이 구성</li>
+                    <li>브랜드 아이덴티티 반영</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 프로세스 섹션 -->
+    <section class="process">
+        <div class="process-container">
+            <h2 class="section-title">진행 프로세스</h2>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3>상담 및 현장 방문</h3>
+                    <p>고객님의 요구사항을 상세히 듣고 현장을 직접 방문하여 공간을 분석합니다.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3>설계 및 견적</h3>
+                    <p>전문 디자이너가 맞춤형 설계안을 제작하고 투명한 견적을 제시합니다.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3>시공 및 관리</h3>
+                    <p>숙련된 시공팀이 체계적으로 공사를 진행하며 전 과정을 꼼꼼히 관리합니다.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3>완공 및 A/S</h3>
+                    <p>최종 점검 후 인도하며, 사후 관리를 통해 지속적인 만족을 제공합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 상담 사례 섹션 -->
+    <section id="consultation" class="consultation">
+        <h2 class="section-title">상담 사례</h2>
+        <div class="consultation-grid">
+            <div class="consultation-card">
+                <div class="consultation-placeholder">
+                    주거 공간 상담 예시
+                </div>
+                <div class="consultation-content">
+                    <h3>30평대 아파트 전체 리모델링</h3>
+                    <p><strong>고객 요청사항:</strong> 오래된 아파트를 모던하고 밝은 분위기로 변경</p>
+                    <p><strong>제안 솔루션:</strong> 화이트톤 베이스 + 우드 포인트, 개방형 주방, LED 간접조명</p>
+                </div>
+            </div>
+
+            <div class="consultation-card">
+                <div class="consultation-placeholder">
+                    상업 공간 상담 예시
+                </div>
+                <div class="consultation-content">
+                    <h3>소형 카페 인테리어</h3>
+                    <p><strong>고객 요청사항:</strong> 따뜻하고 아늑한 감성 카페 공간</p>
+                    <p><strong>제안 솔루션:</strong> 브릭 월 + 빈티지 가구, 식물 인테리어, 동선 최적화</p>
+                </div>
+            </div>
+
+            <div class="consultation-card">
+                <div class="consultation-placeholder">
+                    맞춤형 솔루션
+                </div>
+                <div class="consultation-content">
+                    <h3>사무실 공간 재구성</h3>
+                    <p><strong>고객 요청사항:</strong> 효율적인 업무 공간과 휴게 공간 분리</p>
+                    <p><strong>제안 솔루션:</strong> 파티션 활용, 모듈형 가구, 협업 공간 구성</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 견적 문의 섹션 -->
+    <section id="contact" class="contact">
+        <h2 class="section-title" style="color: white;">견적 문의</h2>
+        <p style="font-size: 1.2rem; margin-bottom: 1rem;">무료 상담을 통해 최적의 인테리어 솔루션을 제안해드립니다</p>
+        
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+            <div class="form-group">
+                <label for="name">이름 *</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">연락처 *</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">이메일</label>
+                <input type="email" id="email" name="email">
+            </div>
+
+            <div class="form-group">
+                <label for="service-type">인테리어 유형 *</label>
+                <select id="service-type" name="service-type" required>
+                    <option value="">선택해주세요</option>
+                    <option value="residential">주거 공간</option>
+                    <option value="commercial">상업 공간</option>
+                    <option value="other">기타</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="message">상담 내용 *</label>
+                <textarea id="message" name="message" required placeholder="평수, 예산, 원하시는 스타일 등을 자유롭게 작성해주세요"></textarea>
+            </div>
+
+            <button type="submit" class="submit-button">상담 신청하기</button>
+        </form>
+    </section>
+
+    <!-- 푸터 -->
+    <footer>
+        <p>&copy; 2024 대성기획인테리어. All rights reserved.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">당신의 공간을 특별하게 만듭니다</p>
+    </footer>
+
+    <script>
+        // 폼 제출 처리
+        function handleSubmit(event) {
+            event.preventDefault();
+            alert('상담 신청이 접수되었습니다!\n빠른 시일 내에 연락드리겠습니다.');
+            event.target.reset();
+        }
+
+        // 스무스 스크롤
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
