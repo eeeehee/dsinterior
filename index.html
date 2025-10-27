@@ -614,42 +614,46 @@
     <header>
         <nav>
             <div class="logo-container">
-                <!-- 세련된 DS 로고 SVG -->
-                <svg class="logo-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-                    <!-- 외곽 원형 테두리 -->
-                    <circle cx="60" cy="60" r="55" fill="none" stroke="url(#gradient1)" stroke-width="3" opacity="0.3"/>
-                    
+                <!-- 모던하고 미니멀한 DS 로고 SVG -->
+                <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                     <!-- 그라데이션 정의 -->
                     <defs>
-                        <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                             <stop offset="0%" style="stop-color:#3498db;stop-opacity:1" />
                             <stop offset="100%" style="stop-color:#2c3e50;stop-opacity:1" />
                         </linearGradient>
-                        <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#2c3e50;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#3498db;stop-opacity:1" />
-                        </linearGradient>
                     </defs>
                     
-                    <!-- D 글자 (왼쪽) - 건축적 느낌 -->
-                    <path d="M 30 35 L 30 85 L 45 85 C 55 85, 60 80, 60 60 C 60 40, 55 35, 45 35 Z M 38 43 L 45 43 C 50 43, 52 47, 52 60 C 52 73, 50 77, 45 77 L 38 77 Z" 
-                          fill="url(#gradient1)"/>
-                    
-                    <!-- S 글자 (오른쪽) - 유려한 곡선 -->
-                    <path d="M 70 40 C 70 35, 73 32, 78 32 C 83 32, 86 35, 86 38 L 78 38 C 78 37, 77.5 37, 77 37 C 75 37, 74 38, 74 40 C 74 45, 90 48, 90 60 C 90 68, 85 73, 77 73 C 69 73, 64 68, 64 63 L 72 63 C 72 65, 74 68, 77 68 C 80 68, 82 66, 82 62 C 82 55, 66 52, 66 40 Z" 
-                          fill="url(#gradient2)"/>
-                    
-                    <!-- 지붕 모양 장식 (상단) -->
-                    <path d="M 55 25 L 60 20 L 65 25" 
+                    <!-- 외곽 사각 프레임 (건축적 요소) -->
+                    <rect x="15" y="15" width="70" height="70" 
                           fill="none" 
+                          stroke="url(#logoGradient)" 
+                          stroke-width="2.5" 
+                          rx="5"/>
+                    
+                    <!-- D 글자 - 모던하고 굵게 -->
+                    <text x="32" y="65" 
+                          font-family="Arial, sans-serif" 
+                          font-size="40" 
+                          font-weight="700" 
+                          fill="url(#logoGradient)"
+                          letter-spacing="-2">D</text>
+                    
+                    <!-- S 글자 - 모던하고 굵게 -->
+                    <text x="60" y="65" 
+                          font-family="Arial, sans-serif" 
+                          font-size="40" 
+                          font-weight="700" 
+                          fill="url(#logoGradient)"
+                          letter-spacing="-2">S</text>
+                    
+                    <!-- 상단 지붕 라인 (미니멀) -->
+                    <line x1="35" y1="25" x2="50" y2="18" 
                           stroke="#3498db" 
                           stroke-width="2.5" 
-                          stroke-linecap="round" 
-                          stroke-linejoin="round"/>
-                    
-                    <!-- 바닥 라인 (하단) -->
-                    <line x1="35" y1="90" x2="85" y2="90" 
-                          stroke="#2c3e50" 
+                          stroke-linecap="round"/>
+                    <line x1="50" y1="18" x2="65" y2="25" 
+                          stroke="#3498db" 
                           stroke-width="2.5" 
                           stroke-linecap="round"/>
                 </svg>
@@ -773,7 +777,7 @@
                     <h3>감성 카페 공간 연출</h3>
                     <p><strong>고객 요청:</strong> SNS에서 화제가 될 만한 포토존이 있는 카페</p>
                     <p><strong>솔루션:</strong> 브릭월 포인트, 빈티지 가구 큐레이팅, 식물 인테리어, 동선 최적화</p>
-                    <p><strong>결과:</strong> 오픈 1개월 만에 인스타그램 1만 팔로워 달성</p>
+                    <p><strong>결과:</strong> 고객 만족도 최상</p>
                 </div>
             </div>
 
