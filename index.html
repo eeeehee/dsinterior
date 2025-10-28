@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>대성기획인테리어 · 모달 시공사례</title>
+<title>대성기획인테리어 · 당신의 일상을 디자인합니다</title>
 <!-- Fonts: SUIT + Cafe24Ssurround -->
 <link href="https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/static/woff2/SUIT.css" rel="stylesheet"/>
 <link href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201@1.0/Cafe24Ssurround.woff2" rel="stylesheet"/>
@@ -378,7 +378,7 @@ input, textarea{font-size:14px}
 </div>
 </div>
 
-<button class="btn" id="openWriteModalBtn" style="margin-bottom:24px;background:#6b7280;color:#fff;border-color:#6b7280;box-shadow:0 2px 8px rgba(0,0,0,.1)">✏️ 견적 등록하기</button>
+<button class="btn" id="openWriteModalBtn" style="margin-bottom:24px;background:#6b7280;color:#fff;border-color:#6b7280;box-shadow:0 2px 8px rgba(0,0,0,.1)">📋 견적 요청하기</button>
 
 <div style="background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.06);margin-bottom:20px">
 <div class="toolbar">
@@ -1231,16 +1231,21 @@ input, textarea{font-size:14px}
               <strong style="color:#6b7280;font-size:0.85rem;display:block;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.05em;">상세 내용</strong>
               <div style="padding:20px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;line-height:1.8;white-space:pre-wrap;font-size:1rem;min-height:120px;color:#374151;">${it.content}</div>
             </div>
-            ${state.admin ? `
+            
+            <!-- 댓글 섹션 (항상 표시) -->
             <div style="margin-top:24px;border-top:1px solid #e5e7eb;padding-top:24px;">
               <strong style="color:#6b7280;font-size:0.85rem;display:block;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.05em;">💬 대성기획인테리어 댓글</strong>
               <div id="commentsList_${it.id}" style="margin-bottom:16px;"></div>
+              
+              ${state.admin ? `
+              <!-- 댓글 입력창 (관리자만) -->
               <div style="display:flex;gap:8px;">
                 <input type="text" id="commentInput_${it.id}" placeholder="댓글을 입력하세요..." style="flex:1;padding:12px 14px;border:1px solid #e5e7eb;border-radius:10px;font-size:0.95rem;">
                 <button onclick="addComment('${it.id}')" style="padding:10px 20px;background:#3b82f6;color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer;white-space:nowrap;" onmouseover="this.style.background='#2563eb'" onmouseout="this.style.background='#3b82f6'">등록</button>
               </div>
+              ` : ''}
             </div>
-            ` : ''}
+            
             <div style="margin-top:28px;text-align:center;">
               <button onclick="closeDetailModal()" style="padding:12px 32px;background:#f3f4f6;color:#374151;border:none;border-radius:10px;font-weight:600;cursor:pointer;font-size:1rem;transition:background 0.2s;" onmouseover="this.style.background='#e5e7eb'" onmouseout="this.style.background='#f3f4f6'">닫기</button>
             </div>
@@ -1264,10 +1269,8 @@ input, textarea{font-size:14px}
         
         detailModal.style.display = 'flex';
         
-        // 댓글 렌더링
-        if(state.admin){
-          renderComments(it.id);
-        }
+        // 댓글 렌더링 (항상 실행)
+        renderComments(it.id);
         
         // 배경 클릭 시 닫기
         detailModal.addEventListener('click', function(e){
