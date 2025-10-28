@@ -235,10 +235,79 @@ input, textarea{font-size:14px}
   .case-card{flex-direction:column !important;}
   .case-card .thumb{width:100% !important; height:auto !important;}
   
-  /* 테이블 반응형 */
-  .table-wrap{overflow-x:auto; -webkit-overflow-scrolling:touch;}
-  .table{min-width:600px; font-size:13px;}
-  .table th, .table td{padding:8px 6px; font-size:12px;}
+  /* ========== 견적 테이블 카드 형식으로 변경 ========== */
+  .table-wrap{
+    border:none !important;
+    overflow:visible !important;
+  }
+  
+  .table{
+    border:none !important;
+    display:block !important;
+  }
+  
+  .table thead{
+    display:none !important; /* 헤더 숨김 */
+  }
+  
+  .table tbody{
+    display:block !important;
+  }
+  
+  .table tbody tr{
+    display:block !important;
+    margin-bottom:16px;
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    padding:16px;
+    background:#fff;
+    box-shadow:0 2px 8px rgba(0,0,0,0.06);
+  }
+  
+  .table tbody tr:hover{
+    background:#fffbeb;
+  }
+  
+  .table tbody td{
+    display:block !important;
+    border:none !important;
+    padding:8px 0 !important;
+    text-align:left !important;
+    font-size:14px !important;
+  }
+  
+  /* 각 td 앞에 라벨 추가 */
+  .table tbody td:nth-child(1)::before{content:"선택: "; font-weight:600; color:#6b7280;}
+  .table tbody td:nth-child(2)::before{content:"No: "; font-weight:600; color:#6b7280;}
+  .table tbody td:nth-child(3)::before{content:"이름: "; font-weight:600; color:#6b7280;}
+  .table tbody td:nth-child(4)::before{content:"연락처: "; font-weight:600; color:#6b7280;}
+  .table tbody td:nth-child(5)::before{content:"공간: "; font-weight:600; color:#6b7280;}
+  .table tbody td:nth-child(6)::before{content:"내용: "; font-weight:600; color:#6b7280;}
+  .table tbody td:nth-child(7)::before{content:"등록일: "; font-weight:600; color:#6b7280;}
+  .table tbody td:nth-child(8)::before{content:"상태: "; font-weight:600; color:#6b7280;}
+  
+  /* 첫번째 td(체크박스)는 오른쪽 정렬 */
+  .table tbody td:nth-child(1){
+    text-align:right !important;
+    padding:0 !important;
+    margin-bottom:8px;
+  }
+  .table tbody td:nth-child(1)::before{
+    display:none;
+  }
+  
+  /* No는 숨김 */
+  .table tbody td:nth-child(2){
+    display:none !important;
+  }
+  
+  /* 내용은 말줄임 */
+  .table tbody td:nth-child(6){
+    max-width:100%;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
   
   /* 체크박스 터치 영역 확대 */
   input[type="checkbox"]{
@@ -263,11 +332,99 @@ input, textarea{font-size:14px}
   .admin-bar{flex-direction:column; gap:12px; align-items:stretch; padding:12px 16px;}
   .admin-bar .btn{width:100%; justify-content:center; min-height:44px;}
   
-  /* 모달 */
+  /* ========== 상세보기 모달 폰트 크기 조정 ========== */
   .emodal{max-height:90vh; overflow-y:auto;}
   .emodal .body{padding:16px 20px;}
   .write-modal-body{padding:16px !important;}
   .quote-modal-body{padding:16px !important;}
+  
+  /* 상세보기 모달 - 모바일 폰트 크기 */
+  .detail-modal-content{padding:20px !important;}
+  
+  .detail-modal-title{
+    font-size:1.3rem !important;
+    margin-bottom:20px !important;
+  }
+  
+  .detail-info-grid{
+    padding:16px !important;
+    margin-bottom:20px !important;
+  }
+  
+  .detail-info-grid > div{
+    grid-template-columns:1fr !important;
+    gap:16px !important;
+  }
+  
+  .detail-label{
+    font-size:0.8rem !important;
+    margin-bottom:6px !important;
+  }
+  
+  .detail-value{
+    font-size:1rem !important;
+  }
+  
+  .detail-content{
+    font-size:1rem !important;
+    padding:16px !important;
+    line-height:1.7 !important;
+  }
+  
+  /* 댓글 섹션 */
+  .detail-comments{
+    margin-top:20px !important;
+    padding-top:20px !important;
+  }
+  
+  .detail-comments strong{
+    font-size:0.85rem !important;
+  }
+  
+  /* 댓글 아이템 */
+  .comment-item{
+    padding:12px !important;
+    margin-bottom:10px !important;
+  }
+  
+  .comment-header{
+    margin-bottom:8px !important;
+  }
+  
+  .comment-author{
+    font-size:0.95rem !important;
+  }
+  
+  .comment-date{
+    font-size:0.75rem !important;
+  }
+  
+  .comment-text{
+    font-size:0.95rem !important;
+    line-height:1.6 !important;
+  }
+  
+  .no-comments{
+    font-size:0.9rem !important;
+    padding:16px !important;
+  }
+  
+  .detail-comments input{
+    font-size:1rem !important;
+    padding:10px 12px !important;
+  }
+  
+  .detail-comments button{
+    font-size:0.9rem !important;
+    padding:10px 16px !important;
+  }
+  
+  /* 닫기 버튼 */
+  .detail-close-btn{
+    font-size:1rem !important;
+    padding:12px 24px !important;
+    min-height:44px;
+  }
   
   /* 견적서 작성 */
   .item-row{grid-template-columns:1fr; gap:6px;}
@@ -278,9 +435,6 @@ input, textarea{font-size:14px}
   
   /* 폼 요소 - iOS zoom 방지 */
   input, textarea, select{font-size:16px !important; min-height:44px;}
-  
-  /* 상세 내용 */
-  .detail-info{padding:16px !important;}
   
   /* Pager 버튼 */
   .pager button{min-width:44px; height:44px;}
@@ -310,8 +464,29 @@ input, textarea{font-size:14px}
   .menu{gap:4px;}
   .menu a{font-size:0.75rem; padding:6px 2px;}
   
-  .table{min-width:500px; font-size:11px;}
-  .table th, .table td{padding:6px 4px; font-size:11px;}
+  /* 카드형 테이블 더 작게 */
+  .table tbody tr{padding:12px; margin-bottom:12px;}
+  .table tbody td{padding:6px 0 !important; font-size:13px !important;}
+  
+  /* 상세보기 모달 더 작게 */
+  .detail-modal-content{padding:16px !important;}
+  .detail-modal-title{font-size:1.1rem !important;}
+  .detail-info-grid{padding:12px !important;}
+  .detail-label{font-size:0.75rem !important;}
+  .detail-value{font-size:0.95rem !important;}
+  .detail-content{font-size:0.95rem !important; padding:12px !important;}
+  
+  /* 댓글 더 작게 */
+  .comment-item{padding:10px !important;}
+  .comment-author{font-size:0.9rem !important;}
+  .comment-date{font-size:0.7rem !important;}
+  .comment-text{font-size:0.9rem !important;}
+  
+  /* 닫기 버튼 */
+  .detail-close-btn{
+    font-size:0.9rem !important;
+    padding:10px 20px !important;
+  }
   
   .emodal .body{padding:12px 16px;}
   .btn{font-size:0.85rem; padding:10px 12px;}
@@ -1310,45 +1485,45 @@ input, textarea{font-size:14px}
         const dateStr = `${date.getFullYear()}년 ${date.getMonth()+1}월 ${date.getDate()}일`;
         
         const detailHTML = `
-          <div style="padding:32px;max-width:100%;">
-            <h3 style="margin:0 0 24px 0;font-size:1.6rem;border-bottom:2px solid #e5e7eb;padding-bottom:16px;text-align:left;color:#111827;font-weight:700;display:flex;align-items:center;gap:10px;">
+          <div class="detail-modal-content" style="padding:32px;max-width:100%;">
+            <h3 class="detail-modal-title" style="margin:0 0 24px 0;font-size:1.6rem;border-bottom:2px solid #e5e7eb;padding-bottom:16px;text-align:left;color:#111827;font-weight:700;display:flex;align-items:center;gap:10px;">
               <span style="display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;background:#eff6ff;border-radius:10px;font-size:1.2rem;">📄</span>
               견적 요청 상세${privateLabel}
             </h3>
-            <div style="background:#f9fafb;padding:24px;border-radius:12px;margin-bottom:24px;border:1px solid #e5e7eb;">
+            <div class="detail-info-grid" style="background:#f9fafb;padding:24px;border-radius:12px;margin-bottom:24px;border:1px solid #e5e7eb;">
               <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;">
                 <div>
-                  <strong style="color:#6b7280;font-size:0.85rem;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em;">작성자</strong>
-                  <div style="font-size:1.1rem;font-weight:600;color:#111827;">${it.name}</div>
+                  <strong class="detail-label" style="color:#6b7280;font-size:0.85rem;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em;">작성자</strong>
+                  <div class="detail-value" style="font-size:1.1rem;font-weight:600;color:#111827;">${it.name}</div>
                 </div>
                 <div>
-                  <strong style="color:#6b7280;font-size:0.85rem;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em;">연락처</strong>
-                  <div style="font-size:1.1rem;font-weight:600;color:#111827;">${phone}</div>
+                  <strong class="detail-label" style="color:#6b7280;font-size:0.85rem;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em;">연락처</strong>
+                  <div class="detail-value" style="font-size:1.1rem;font-weight:600;color:#111827;">${phone}</div>
                 </div>
                 ${email !== '-' ? `
                 <div>
-                  <strong style="color:#6b7280;font-size:0.85rem;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em;">이메일</strong>
-                  <div style="font-size:1.1rem;font-weight:600;color:#111827;">${email}</div>
+                  <strong class="detail-label" style="color:#6b7280;font-size:0.85rem;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em;">이메일</strong>
+                  <div class="detail-value" style="font-size:1.1rem;font-weight:600;color:#111827;">${email}</div>
                 </div>
                 ` : ''}
                 <div>
-                  <strong style="color:#6b7280;font-size:0.85rem;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em;">공간 유형</strong>
-                  <div style="font-size:1.1rem;font-weight:600;color:#111827;">${it.spaceType||'-'}</div>
+                  <strong class="detail-label" style="color:#6b7280;font-size:0.85rem;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em;">공간 유형</strong>
+                  <div class="detail-value" style="font-size:1.1rem;font-weight:600;color:#111827;">${it.spaceType||'-'}</div>
                 </div>
                 <div>
-                  <strong style="color:#6b7280;font-size:0.85rem;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em;">등록일</strong>
-                  <div style="font-size:1.1rem;font-weight:600;color:#111827;">${dateStr}</div>
+                  <strong class="detail-label" style="color:#6b7280;font-size:0.85rem;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em;">등록일</strong>
+                  <div class="detail-value" style="font-size:1.1rem;font-weight:600;color:#111827;">${dateStr}</div>
                 </div>
               </div>
             </div>
             <div>
-              <strong style="color:#6b7280;font-size:0.85rem;display:block;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.05em;">상세 내용</strong>
-              <div style="padding:20px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;line-height:1.8;white-space:pre-wrap;font-size:1rem;min-height:120px;color:#374151;">${it.content}</div>
+              <strong class="detail-label" style="color:#6b7280;font-size:0.85rem;display:block;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.05em;">상세 내용</strong>
+              <div class="detail-content" style="padding:20px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;line-height:1.8;white-space:pre-wrap;font-size:1rem;min-height:120px;color:#374151;">${it.content}</div>
             </div>
             
             <!-- 댓글 섹션 (항상 표시) -->
-            <div style="margin-top:24px;border-top:1px solid #e5e7eb;padding-top:24px;">
-              <strong style="color:#6b7280;font-size:0.85rem;display:block;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.05em;">💬 대성기획인테리어 댓글</strong>
+            <div class="detail-comments" style="margin-top:24px;border-top:1px solid #e5e7eb;padding-top:24px;">
+              <strong class="detail-label" style="color:#6b7280;font-size:0.85rem;display:block;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.05em;">💬 대성기획인테리어 댓글</strong>
               <div id="commentsList_${it.id}" style="margin-bottom:16px;"></div>
               
               ${state.admin ? `
@@ -1361,7 +1536,7 @@ input, textarea{font-size:14px}
             </div>
             
             <div style="margin-top:28px;text-align:center;">
-              <button onclick="closeDetailModal()" style="padding:12px 32px;background:#f3f4f6;color:#374151;border:none;border-radius:10px;font-weight:600;cursor:pointer;font-size:1rem;transition:background 0.2s;" onmouseover="this.style.background='#e5e7eb'" onmouseout="this.style.background='#f3f4f6'">닫기</button>
+              <button class="detail-close-btn" onclick="closeDetailModal()" style="padding:12px 32px;background:#f3f4f6;color:#374151;border:none;border-radius:10px;font-weight:600;cursor:pointer;font-size:1rem;transition:background 0.2s;" onmouseover="this.style.background='#e5e7eb'" onmouseout="this.style.background='#f3f4f6'">닫기</button>
             </div>
           </div>
         `;
@@ -1409,19 +1584,19 @@ input, textarea{font-size:14px}
     if(!commentsList) return;
     
     if(!item.comments || item.comments.length === 0){
-      commentsList.innerHTML = '<div style="color:#999;text-align:center;padding:20px;">등록된 댓글이 없습니다.</div>';
+      commentsList.innerHTML = '<div class="no-comments" style="color:#999;text-align:center;padding:20px;">등록된 댓글이 없습니다.</div>';
       return;
     }
     
     let html = '';
     item.comments.forEach((comment, idx) => {
       html += `
-        <div style="background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:12px;margin-bottom:8px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-            <span style="font-weight:600;color:#111;">대성기획인테리어</span>
-            <span style="font-size:0.85rem;color:#999;">${new Date(comment.date).toLocaleString()}</span>
+        <div class="comment-item" style="background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:12px;margin-bottom:8px;">
+          <div class="comment-header" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+            <span class="comment-author" style="font-weight:600;color:#111;">대성기획인테리어</span>
+            <span class="comment-date" style="font-size:0.85rem;color:#999;">${new Date(comment.date).toLocaleString()}</span>
           </div>
-          <div style="color:#333;line-height:1.6;">${comment.text}</div>
+          <div class="comment-text" style="color:#333;line-height:1.6;">${comment.text}</div>
         </div>
       `;
     });
