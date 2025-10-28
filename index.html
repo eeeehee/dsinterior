@@ -1313,7 +1313,7 @@ input, textarea{font-size:14px}
   };
   
   // 댓글 추가
-  window.addComment = function(itemId){
+  window.addComment = async function(itemId){
     const input = document.getElementById(`commentInput_${itemId}`);
     if(!input) return;
     
@@ -1333,7 +1333,9 @@ input, textarea{font-size:14px}
       date: new Date().toISOString()
     });
     
-    save();
+    // Firestore에 저장
+    await saveItem(item);
+    
     input.value = '';
     renderComments(itemId);
     toast('댓글이 등록되었습니다.');
