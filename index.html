@@ -433,12 +433,12 @@ input, textarea{font-size:14px}
   
   .table tbody tr{
     display:block !important;
-    margin-bottom:16px;
+    margin-bottom:10px;
     border:1px solid #e5e7eb;
-    border-radius:12px;
-    padding:16px;
+    border-radius:10px;
+    padding:10px 12px;
     background:#fff;
-    box-shadow:0 2px 8px rgba(0,0,0,0.06);
+    box-shadow:0 1px 3px rgba(0,0,0,0.08);
   }
   
   .table tbody tr:hover{
@@ -448,29 +448,38 @@ input, textarea{font-size:14px}
   .table tbody td{
     display:block !important;
     border:none !important;
-    padding:8px 0 !important;
+    padding:3px 0 !important;
     text-align:left !important;
-    font-size:14px !important;
+    font-size:12px !important;
+    line-height:1.5;
   }
   
-  /* 각 td 앞에 라벨 추가 */
-  .table tbody td:nth-child(1)::before{content:"선택: "; font-weight:600; color:#6b7280;}
-  .table tbody td:nth-child(2)::before{content:"No: "; font-weight:600; color:#6b7280;}
-  .table tbody td:nth-child(3)::before{content:"이름: "; font-weight:600; color:#6b7280;}
-  .table tbody td:nth-child(4)::before{content:"연락처: "; font-weight:600; color:#6b7280;}
-  .table tbody td:nth-child(5)::before{content:"공간: "; font-weight:600; color:#6b7280;}
-  .table tbody td:nth-child(6)::before{content:"내용: "; font-weight:600; color:#6b7280;}
-  .table tbody td:nth-child(7)::before{content:"등록일: "; font-weight:600; color:#6b7280;}
-  .table tbody td:nth-child(8)::before{content:"상태: "; font-weight:600; color:#6b7280;}
+  /* 각 td 앞에 라벨 추가 - 더 작고 짧게 */
+  .table tbody td:nth-child(1)::before{content:""; font-weight:600; color:#6b7280; font-size:11px;}
+  .table tbody td:nth-child(2)::before{content:""; font-weight:600; color:#6b7280; font-size:11px;}
+  .table tbody td:nth-child(3)::before{content:"👤 "; font-weight:600; color:#6b7280; font-size:11px;}
+  .table tbody td:nth-child(4)::before{content:"📞 "; font-weight:600; color:#6b7280; font-size:11px;}
+  .table tbody td:nth-child(5)::before{content:"🏠 "; font-weight:600; color:#6b7280; font-size:11px;}
+  .table tbody td:nth-child(6)::before{content:"💬 "; font-weight:600; color:#6b7280; font-size:11px;}
+  .table tbody td:nth-child(7)::before{content:"📅 "; font-weight:600; color:#6b7280; font-size:10px;}
+  .table tbody td:nth-child(8)::before{content:""; font-weight:600; color:#6b7280; font-size:11px;}
   
-  /* 첫번째 td(체크박스)는 오른쪽 정렬 */
+  /* 첫번째 td(체크박스)는 오른쪽 상단에 고정 */
   .table tbody td:nth-child(1){
-    text-align:right !important;
+    position:absolute;
+    top:10px;
+    right:10px;
     padding:0 !important;
-    margin-bottom:8px;
+    margin:0;
   }
   .table tbody td:nth-child(1)::before{
     display:none;
+  }
+  
+  /* tr을 relative로 설정 */
+  .table tbody tr{
+    position:relative;
+    padding-right:40px; /* 체크박스 공간 확보 */
   }
   
   /* No는 숨김 */
@@ -478,18 +487,64 @@ input, textarea{font-size:14px}
     display:none !important;
   }
   
-  /* 내용은 말줄임 */
+  /* 이름을 더 크고 굵게 */
+  .table tbody td:nth-child(3){
+    font-size:13px !important;
+    font-weight:700 !important;
+    color:#111 !important;
+    margin-bottom:2px;
+  }
+  
+  /* 연락처 */
+  .table tbody td:nth-child(4){
+    font-size:11px !important;
+    color:#4b5563;
+  }
+  
+  /* 공간 타입 배지 스타일 */
+  .table tbody td:nth-child(5){
+    font-size:11px !important;
+    margin-top:6px;
+    margin-bottom:4px;
+  }
+  .table tbody td:nth-child(5) .space-badge{
+    padding:3px 8px;
+    font-size:10px;
+  }
+  
+  /* 내용은 2줄까지만 표시 */
   .table tbody td:nth-child(6){
     max-width:100%;
     overflow:hidden;
     text-overflow:ellipsis;
-    white-space:nowrap;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    white-space:normal;
+    font-size:11px !important;
+    color:#6b7280;
+    line-height:1.5;
+    margin-bottom:4px;
   }
   
-  /* 체크박스 터치 영역 확대 */
+  /* 등록일 - 더 작고 연하게 */
+  .table tbody td:nth-child(7){
+    font-size:10px !important;
+    color:#9ca3af;
+  }
+  
+  /* 상태 */
+  .table tbody td:nth-child(8){
+    position:absolute;
+    top:10px;
+    left:10px;
+    padding:0 !important;
+  }
+  
+  /* 체크박스 크기 줄임 */
   input[type="checkbox"]{
-    width:20px;
-    height:20px;
+    width:18px;
+    height:18px;
     cursor:pointer;
   }
   
