@@ -205,7 +205,13 @@ input, textarea{font-size:14px}
   .btn{height:42px}
   .emodal{width:96vw}
 }
-</style></head>
+</style>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+</head>
 <body>
 <header>
 <div class="nav">
@@ -531,6 +537,22 @@ input, textarea{font-size:14px}
 
 </div><script>
 (function(){
+  // ---- Firebase 초기화 ----
+  const firebaseConfig = {
+    apiKey: "AIzaSyDcGo7RFr_RwHIpcJ1cYy4HZG_azPZrUaE",
+    authDomain: "dsinterior-b30c0.firebaseapp.com",
+    projectId: "dsinterior-b30c0",
+    storageBucket: "dsinterior-b30c0.firebasestorage.app",
+    messagingSenderId: "415692346183",
+    appId: "1:415692346183:web:5b1eeead1ee9ef963bf262",
+    measurementId: "G-3P3DK96EG5"
+  };
+
+  // Firebase 초기화
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+  const estimatesCollection = db.collection('estimates');
+
   // ---- UI helpers ----
   function toast(msg){
     let t = document.querySelector('.toast');
@@ -545,7 +567,6 @@ input, textarea{font-size:14px}
     return phone.test(v) || email.test(v);
   }
 
-  const LS_KEY='dsinterior_estimates_v1';
   const CM_KEY='dsinterior_comments_v1';
   const PAGE_SIZE=10;
   let state={
@@ -556,13 +577,55 @@ input, textarea{font-size:14px}
     selected: new Set()
   };
 
-  function load(){
-    try{ state.items=JSON.parse(localStorage.getItem(LS_KEY))||[] }catch(e){ state.items=[] }
-    state.items = state.items.map(x=>({hidden:false, ...x}));
-    render();
+  // Firestore에서 데이터 로드
+  async function load(){
+    try {
+      const snapshot = await estimatesCollection.orderBy('createdAt', 'desc').get();
+      state.items = snapshot.docs.map(doc => ({
+        id: doc.id,
+        hidden: false,
+        ...doc.data()
+      }));
+      
+      // 데이터가 없으면 seed 데이터 추가
+      if(state.items.length === 0) {
+        const seedData = [
+          {id:'seed1', name:'김**', phone:'010-****-1234', email:'', spaceType:'아파트 33평', content:'거실/주방 확장과 전체 도장, 욕실 교체 견적 문의드립니다', createdAt:new Date(Date.now()-86400000*2).toISOString(), isPrivate:false, password:'', hidden:false},
+          {id:'seed2', name:'박**', phone:'010-****-5678', email:'park@example.com', spaceType:'상가 20평', content:'카페 인테리어(바, 조명, 벽면 시공) 견적 희망합니다', createdAt:new Date(Date.now()-86400000*4).toISOString(), isPrivate:true, password:'1234', hidden:false},
+          {id:'seed3', name:'이**', phone:'010-****-9012', email:'', spaceType:'오피스텔 15평', content:'원룸 구조 전체 인테리어 견적 요청', createdAt:new Date(Date.now()-86400000*7).toISOString(), isPrivate:false, password:'', hidden:false}
+        ];
+        
+        for(const item of seedData) {
+          await estimatesCollection.doc(item.id).set(item);
+        }
+        state.items = seedData;
+      }
+      
+      render();
+    } catch(e) {
+      console.error('Firestore 로드 오류:', e);
+      toast('데이터 로드 중 오류가 발생했습니다.');
+    }
   }
-  function save(){
-    localStorage.setItem(LS_KEY, JSON.stringify(state.items));
+
+  // Firestore에 데이터 저장 (개별 항목)
+  async function saveItem(item){
+    try {
+      await estimatesCollection.doc(item.id).set(item);
+    } catch(e) {
+      console.error('Firestore 저장 오류:', e);
+      toast('저장 중 오류가 발생했습니다.');
+    }
+  }
+
+  // Firestore에서 데이터 삭제
+  async function deleteItem(id){
+    try {
+      await estimatesCollection.doc(id).delete();
+    } catch(e) {
+      console.error('Firestore 삭제 오류:', e);
+      toast('삭제 중 오류가 발생했습니다.');
+    }
   }
 
   function $(s){return document.querySelector(s)}
@@ -701,7 +764,7 @@ input, textarea{font-size:14px}
     // Form submit → button click으로 변경
     const submitEstimateBtn = document.getElementById('submitEstimateBtn');
     if(submitEstimateBtn){
-      submitEstimateBtn.addEventListener('click', (e)=>{
+      submitEstimateBtn.addEventListener('click', async (e)=>{
         e.preventDefault();
         console.log('견적 등록 버튼 클릭됨');
         
@@ -756,7 +819,7 @@ input, textarea{font-size:14px}
         }
         
         state.items.unshift(item);
-        save();
+        await saveItem(item);
         
         // 폼 초기화
         if(nameInput) nameInput.value = '';
@@ -848,15 +911,18 @@ input, textarea{font-size:14px}
           document.body.removeChild(confirmModal);
         });
         
-        confirmDelete.addEventListener('click', () => {
+        confirmDelete.addEventListener('click', async () => {
           console.log('사용자가 삭제 확인함');
           console.log('삭제 전 항목 수:', state.items.length);
+          
+          // Firestore에서 삭제
+          const deletePromises = Array.from(state.selected).map(id => deleteItem(id));
+          await Promise.all(deletePromises);
           
           state.items = state.items.filter(x => !state.selected.has(x.id));
           console.log('삭제 후 항목 수:', state.items.length);
           
           state.selected.clear(); 
-          save(); 
           render();
           toast('삭제되었습니다.');
           console.log('삭제 완료');
@@ -876,10 +942,22 @@ input, textarea{font-size:14px}
     }
     
     if(adminHideToggled){
-      adminHideToggled.addEventListener('click', ()=>{
+      adminHideToggled.addEventListener('click', async ()=>{
         if(state.selected.size===0) return;
+        
+        // Firestore 업데이트
+        const updatePromises = Array.from(state.selected).map(async id => {
+          const item = state.items.find(x => x.id === id);
+          if(item) {
+            const updatedItem = {...item, hidden: !item.hidden};
+            await saveItem(updatedItem);
+            return updatedItem;
+          }
+        });
+        await Promise.all(updatePromises);
+        
         state.items = state.items.map(x=> state.selected.has(x.id)? {...x, hidden:!x.hidden}: x);
-        save(); render();
+        render();
       });
     }
     
@@ -1291,19 +1369,12 @@ input, textarea{font-size:14px}
   }
 
   // Initialize sample data if empty to show UI
-  document.addEventListener('DOMContentLoaded', ()=>{
+  document.addEventListener('DOMContentLoaded', async ()=>{
     // 이벤트 리스너 초기화
     initEventListeners();
     
-    if((state.items||[]).length===0){
-      state.items=[
-        {id:'seed1', name:'김**', phone:'010-****-1234', email:'', spaceType:'아파트 33평', content:'거실/주방 확장과 전체 도장, 욕실 교체 견적 문의드립니다', createdAt:new Date(Date.now()-86400000*2).toISOString(), isPrivate:false, password:'', hidden:false},
-        {id:'seed2', name:'박**', phone:'010-****-5678', email:'park@example.com', spaceType:'상가 20평', content:'카페 인테리어(바, 조명, 벽면 시공) 견적 희망합니다', createdAt:new Date(Date.now()-86400000*4).toISOString(), isPrivate:true, password:'1234', hidden:false},
-        {id:'seed3', name:'이**', phone:'010-****-9012', email:'', spaceType:'오피스텔 15평', content:'원룸 구조 전체 인테리어 견적 요청', createdAt:new Date(Date.now()-86400000*7).toISOString(), isPrivate:false, password:'', hidden:false},
-      ];
-      save();
-    }
-    load();
+    // Firestore에서 데이터 로드 (seed 데이터 처리 포함)
+    await load();
   });
 })();
 
