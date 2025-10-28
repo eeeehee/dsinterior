@@ -100,6 +100,38 @@
 .write-modal-header h4{font-size:1.5rem;font-weight:700;margin:0}
 .write-modal-body{padding:28px}
 .write-modal-footer{padding:20px 28px;border-top:1px solid #e5e7eb;display:flex;justify-content:flex-end;gap:12px}
+/* 견적서 작성 모달 */
+.quote-modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:999999;padding:20px;overflow-y:auto}
+.quote-modal.show{display:flex}
+.quote-modal-box{background:#fff;border-radius:12px;width:100%;max-width:900px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.quote-modal-header{padding:24px 28px;border-bottom:1px solid #e5e7eb;display:flex;justify-content:space-between;align-items:center}
+.quote-modal-header h4{font-size:1.5rem;font-weight:700;margin:0}
+.quote-modal-body{padding:28px}
+.quote-modal-footer{padding:20px 28px;border-top:1px solid #e5e7eb;display:flex;justify-content:flex-end;gap:12px}
+.form-section{margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid #f0f0f0}
+.form-section:last-child{border-bottom:none}
+.form-section h5{font-size:1.1rem;font-weight:700;margin:0 0 16px;color:#111}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;margin-bottom:6px;font-weight:600;color:#374151;font-size:0.95rem}
+.req{color:#ef4444;font-weight:bold}
+.quote-item{margin-bottom:12px;padding:12px;background:#f9fafb;border-radius:8px;border:1px solid #e5e7eb}
+.item-row{display:grid;grid-template-columns:2fr 1.5fr 0.8fr 1.2fr 1.2fr 40px;gap:10px;align-items:center}
+.item-row input{padding:8px 10px;font-size:0.9rem}
+.item-total{font-weight:700;color:#3b82f6;text-align:right}
+.btn-remove{background:#ef4444;color:#fff;border:none;width:32px;height:32px;border-radius:6px;cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center}
+.btn-remove:hover{background:#dc2626}
+.total-info{background:#f8f9fb;padding:20px;border-radius:12px;border:1px solid #e5e7eb}
+.total-row{display:flex;justify-content:space-between;padding:10px 0;font-size:1rem;color:#374151}
+.total-final{border-top:2px solid #3b82f6;margin-top:10px;padding-top:16px;font-size:1.3rem;font-weight:700;color:#111}
+.total-final span:last-child{color:#3b82f6}
+@media (max-width:768px){
+.item-row{grid-template-columns:1fr;gap:8px}
+.item-total{text-align:left}
+.form-row{grid-template-columns:1fr}
+}
+.close-btn{background:none;border:none;font-size:1.5rem;color:#6b7280;cursor:pointer;padding:0;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:4px}
+.close-btn:hover{background:#f3f4f6;color:#0b0d0e}
 .close-x{background:none;border:none;font-size:1.8rem;color:#6b7280;cursor:pointer;padding:0;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:4px}
 .close-x:hover{background:#f3f4f6;color:#0b0d0e}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;border:1px solid #ddd;background:#fff;cursor:pointer;transition:.2s}
@@ -153,7 +185,6 @@ html,body{background:unset!important;}
 .emodal .body{padding:20px 24px 26px}
 h4{margin:6px 0 10px 0; font-size:16px}
 label{display:block; font-weight:600; margin:8px 0 6px}
-.req::after{content:" *"; color:#d62b2b}
 .help{display:block; color:#777; font-size:12px; margin-top:4px}
 .input-row{display:flex; gap:10px; align-items:center}
 .input-row > *{flex:1}
@@ -226,7 +257,7 @@ input, textarea{font-size:14px}
 </section>
 <section class="wrap" id="contact" style="background:#0d1117; color:#e8eef4; border-top:1px solid #222; border-bottom:1px solid #222;">
 <h2 class="section-title" style="color:#fff;">CONTACT</h2>
-<p class="lead" style="color:#b7c1cc;">빠른 상담을 원하시면 아래 연락처로 문의 주세요. 이메일 문의는 영업일 기준 이틀 내로 회신 드리겠습니다. 상세한 문의는 견적요청으로 주시면 빠르고 자세하게 답변드리겠습니다!</p>
+<p class="lead" style="color:#b7c1cc;">빠른 상담을 원하시면 아래 연락처로 문의 주세요.<br/>이메일 문의는 영업일 기준 이틀 내로 회신 드리겠습니다.<br/>상세한 문의는 견적요청으로 주시면 빠르고 자세하게 답변드리겠습니다!</p>
 <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:10px;">
 <a class="svc" href="tel:010-3345-2259" style="text-decoration:none;border:1px solid #cfd6de;padding:10px 14px;border-radius:10px;color:#fff;background:transparent">전화 연결</a>
 <a class="svc" href="mailto:yyk2400@naver.com" style="text-decoration:none;border:1px solid #cfd6de;padding:10px 14px;border-radius:10px;color:#fff;background:transparent">이메일</a>
@@ -334,6 +365,7 @@ input, textarea{font-size:14px}
 <div class="admin-bar" id="adminBar">
 <div>관리자 모드 <span class="badge">ON</span></div>
 <div class="toolbar">
+<button class="btn ghost" id="createQuoteBtn">견적서 작성</button>
 <button class="btn ghost" id="adminHideToggled">선택 숨김/해제</button>
 <button class="btn ghost" id="adminDeleteSelected">선택 삭제</button>
 <button class="btn" id="adminSignOut">관리자 로그아웃</button>
@@ -382,16 +414,16 @@ input, textarea{font-size:14px}
 </div>
 </div>
 <div style="margin-bottom:20px" id="passwordField" style="display:none">
-<label class="req">비밀번호 (4자리)</label>
+<label>비밀번호 (4자리) <span class="req">*</span></label>
 <input name="password" type="password" placeholder="비밀번호 4자리" maxlength="4" pattern="[0-9]{4}" disabled/>
 <span class="help">비공개 견적은 비밀번호로 보호됩니다</span>
 </div>
 <div style="margin-bottom:20px">
-<label class="req">이름</label>
+<label>이름 <span class="req">*</span></label>
 <input name="name" placeholder="홍길동" required type="text"/>
 </div>
 <div style="margin-bottom:20px">
-<label class="req">연락처</label>
+<label>연락처 <span class="req">*</span></label>
 <input name="phone" placeholder="010-1234-5678" required type="text"/>
 </div>
 <div style="margin-bottom:20px">
@@ -400,11 +432,11 @@ input, textarea{font-size:14px}
 <span class="help">이메일은 선택사항입니다</span>
 </div>
 <div style="margin-bottom:20px">
-<label class="req">공간 유형</label>
+<label>공간 유형 <span class="req">*</span></label>
 <input name="spaceType" placeholder="예: 아파트 33평, 상가 20평" required type="text"/>
 </div>
 <div style="margin-bottom:20px">
-<label class="req">내용</label>
+<label>내용 <span class="req">*</span></label>
 <textarea name="content" placeholder="원하시는 시공 범위/예산/희망 일정 등을 적어주세요." required></textarea>
 <div class="counter" id="contentCounter">0 / 500</div>
 </div>
@@ -417,6 +449,86 @@ input, textarea{font-size:14px}
 </div>
 </div>
 </div>
+
+<!-- 견적서 작성 모달 -->
+<div class="quote-modal" id="quoteModal">
+<div class="quote-modal-box">
+<div class="quote-modal-header">
+<h4>📄 견적서 작성</h4>
+<button class="close-btn" id="closeQuoteModal">✕</button>
+</div>
+<div class="quote-modal-body">
+<form id="quoteForm">
+<!-- 고객 정보 -->
+<div class="form-section">
+<h5>고객 정보</h5>
+<div class="form-row">
+<div class="form-group">
+<label>성함 <span class="req">*</span></label>
+<input type="text" id="q_customerName" required />
+</div>
+<div class="form-group">
+<label>연락처 <span class="req">*</span></label>
+<input type="text" id="q_customerPhone" placeholder="010-0000-0000" required />
+</div>
+</div>
+<div class="form-group">
+<label>시공 주소</label>
+<input type="text" id="q_customerAddress" placeholder="예) 경기도 고양시 일산동구..." />
+</div>
+</div>
+
+<!-- 시공 내역 -->
+<div class="form-section">
+<h5>시공 내역</h5>
+<div id="quoteItems">
+<div class="quote-item">
+<div class="item-row">
+<input type="text" class="item-name" placeholder="품목" />
+<input type="text" class="item-spec" placeholder="규격" />
+<input type="number" class="item-qty" placeholder="수량" value="1" />
+<input type="number" class="item-price" placeholder="단가" />
+<span class="item-total">0원</span>
+<button type="button" class="btn-remove" onclick="removeQuoteItem(this)">−</button>
+</div>
+</div>
+</div>
+<button type="button" class="btn ghost" id="addQuoteItem" style="margin-top:10px">+ 항목 추가</button>
+</div>
+
+<!-- 금액 정보 -->
+<div class="form-section">
+<h5>금액 정보</h5>
+<div class="total-info">
+<div class="total-row">
+<span>공급가액:</span>
+<span id="supplyAmount">0원</span>
+</div>
+<div class="total-row">
+<span>부가세 (10%):</span>
+<span id="taxAmount">0원</span>
+</div>
+<div class="total-row total-final">
+<span>총 금액:</span>
+<span id="totalAmount">0원</span>
+</div>
+</div>
+</div>
+
+<!-- 비고 -->
+<div class="form-section">
+<h5>특이사항 / 비고</h5>
+<textarea id="q_notes" rows="4" placeholder="특이사항이나 추가 안내사항을 입력하세요"></textarea>
+</div>
+</form>
+</div>
+<div class="quote-modal-footer">
+<button class="btn ghost" type="button" id="cancelQuoteModal">취소</button>
+<button class="btn pri" type="button" id="downloadQuotePDF">🖨️ 인쇄 미리보기</button>
+</div>
+</div>
+</div>
+
 </div><script>
 (function(){
   // ---- UI helpers ----
@@ -1205,6 +1317,42 @@ input, textarea{font-size:14px}
     }
   })();
 
+  // ========== 전화번호 자동 하이픈 기능 ==========
+  function formatPhoneNumber(value) {
+    // 숫자만 추출
+    const numbers = value.replace(/[^\d]/g, '');
+    
+    // 길이에 따라 포맷팅
+    if (numbers.length <= 3) {
+      return numbers;
+    } else if (numbers.length <= 7) {
+      return numbers.slice(0, 3) + '-' + numbers.slice(3);
+    } else if (numbers.length <= 11) {
+      return numbers.slice(0, 3) + '-' + numbers.slice(3, 7) + '-' + numbers.slice(7);
+    } else {
+      // 11자리 넘으면 자르기
+      return numbers.slice(0, 3) + '-' + numbers.slice(3, 7) + '-' + numbers.slice(7, 11);
+    }
+  }
+
+  // 견적 문의 폼의 연락처 입력란
+  const estimatePhoneInput = document.querySelector('input[name="phone"]');
+  if(estimatePhoneInput) {
+    estimatePhoneInput.addEventListener('input', function(e) {
+      const formatted = formatPhoneNumber(e.target.value);
+      e.target.value = formatted;
+    });
+  }
+
+  // 견적서 작성 모달의 연락처 입력란
+  const quotePhoneInput = document.getElementById('q_customerPhone');
+  if(quotePhoneInput) {
+    quotePhoneInput.addEventListener('input', function(e) {
+      const formatted = formatPhoneNumber(e.target.value);
+      e.target.value = formatted;
+    });
+  }
+
   // Close with ESC
   document.addEventListener('keydown', (e)=>{ 
     if(e.key==='Escape'){ 
@@ -1218,5 +1366,402 @@ input, textarea{font-size:14px}
       }
     } 
   });
+
+  // ========== 견적서 작성 기능 ==========
+  const quoteModal = document.getElementById('quoteModal');
+  const createQuoteBtn = document.getElementById('createQuoteBtn');
+  const closeQuoteModal = document.getElementById('closeQuoteModal');
+  const cancelQuoteModal = document.getElementById('cancelQuoteModal');
+  const downloadQuotePDF = document.getElementById('downloadQuotePDF');
+  const addQuoteItem = document.getElementById('addQuoteItem');
+  const quoteItems = document.getElementById('quoteItems');
+
+  // 견적서 작성 모달 열기
+  if(createQuoteBtn){
+    createQuoteBtn.addEventListener('click', () => {
+      quoteModal.classList.add('show');
+      calculateTotal();
+    });
+  }
+
+  // 견적서 모달 닫기
+  if(closeQuoteModal){
+    closeQuoteModal.addEventListener('click', () => {
+      quoteModal.classList.remove('show');
+    });
+  }
+  if(cancelQuoteModal){
+    cancelQuoteModal.addEventListener('click', () => {
+      quoteModal.classList.remove('show');
+    });
+  }
+
+  // 항목 추가
+  if(addQuoteItem){
+    addQuoteItem.addEventListener('click', () => {
+      const newItem = document.createElement('div');
+      newItem.className = 'quote-item';
+      newItem.innerHTML = `
+        <div class="item-row">
+          <input type="text" class="item-name" placeholder="품목" />
+          <input type="text" class="item-spec" placeholder="규격" />
+          <input type="number" class="item-qty" placeholder="수량" value="1" />
+          <input type="number" class="item-price" placeholder="단가" />
+          <span class="item-total">0원</span>
+          <button type="button" class="btn-remove" onclick="removeQuoteItem(this)">−</button>
+        </div>
+      `;
+      quoteItems.appendChild(newItem);
+      attachItemListeners(newItem);
+    });
+  }
+
+  // 항목 삭제
+  window.removeQuoteItem = function(btn) {
+    if(quoteItems.children.length > 1){
+      btn.closest('.quote-item').remove();
+      calculateTotal();
+    } else {
+      alert('최소 1개의 항목은 필요합니다.');
+    }
+  };
+
+  // 각 항목에 이벤트 리스너 추가
+  function attachItemListeners(item) {
+    const qtyInput = item.querySelector('.item-qty');
+    const priceInput = item.querySelector('.item-price');
+    const totalSpan = item.querySelector('.item-total');
+
+    function updateItemTotal() {
+      const qty = parseInt(qtyInput.value) || 0;
+      const price = parseInt(priceInput.value) || 0;
+      const total = qty * price;
+      totalSpan.textContent = total.toLocaleString() + '원';
+      calculateTotal();
+    }
+
+    qtyInput.addEventListener('input', updateItemTotal);
+    priceInput.addEventListener('input', updateItemTotal);
+  }
+
+  // 초기 항목에 리스너 추가
+  document.querySelectorAll('.quote-item').forEach(attachItemListeners);
+
+  // 전체 금액 계산
+  function calculateTotal() {
+    let supplyTotal = 0;
+    document.querySelectorAll('.quote-item').forEach(item => {
+      const qty = parseInt(item.querySelector('.item-qty').value) || 0;
+      const price = parseInt(item.querySelector('.item-price').value) || 0;
+      supplyTotal += qty * price;
+    });
+
+    const tax = Math.round(supplyTotal * 0.1);
+    const total = supplyTotal + tax;
+
+    document.getElementById('supplyAmount').textContent = supplyTotal.toLocaleString() + '원';
+    document.getElementById('taxAmount').textContent = tax.toLocaleString() + '원';
+    document.getElementById('totalAmount').textContent = total.toLocaleString() + '원';
+  }
+
+  // PDF 다운로드
+  if(downloadQuotePDF){
+    downloadQuotePDF.addEventListener('click', () => {
+      console.log('📄 인쇄 버튼 클릭됨!');
+      
+      const customerName = document.getElementById('q_customerName').value;
+      const customerPhone = document.getElementById('q_customerPhone').value;
+      const customerAddress = document.getElementById('q_customerAddress').value;
+      const notes = document.getElementById('q_notes').value;
+
+      console.log('입력된 정보:', { customerName, customerPhone, customerAddress });
+
+      if(!customerName || !customerPhone){
+        alert('고객 정보(성함, 연락처)를 입력해주세요.');
+        return;
+      }
+
+      // 항목 데이터 수집
+      const items = [];
+      document.querySelectorAll('.quote-item').forEach((item, index) => {
+        const name = item.querySelector('.item-name').value;
+        const spec = item.querySelector('.item-spec').value;
+        const qty = parseInt(item.querySelector('.item-qty').value) || 0;
+        const price = parseInt(item.querySelector('.item-price').value) || 0;
+        const total = qty * price;
+
+        if(name || spec || qty || price){
+          items.push({ no: index + 1, name, spec, qty, price, total, category: name });
+        }
+      });
+
+      console.log('수집된 항목:', items);
+
+      if(items.length === 0){
+        alert('시공 내역을 1개 이상 입력해주세요.');
+        return;
+      }
+
+      console.log('인쇄 함수 호출 시작...');
+      
+      // 인쇄 미리보기 생성
+      generateQuotePDF({
+        customerName,
+        customerPhone,
+        customerAddress,
+        items,
+        notes,
+        supplyAmount: document.getElementById('supplyAmount').textContent,
+        taxAmount: document.getElementById('taxAmount').textContent,
+        totalAmount: document.getElementById('totalAmount').textContent
+      });
+    });
+  } else {
+    console.error('❌ downloadQuotePDF 버튼을 찾을 수 없습니다!');
+  }
+
+  // 인쇄 미리보기 생성 함수
+  function generateQuotePDF(data) {
+    console.log('🖨️ generateQuotePDF 함수 실행!', data);
+    
+    // 오늘 날짜
+    const today = new Date();
+    const year = today.getFullYear().toString().slice(-2);
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+
+    // HTML 템플릿 생성 (업로드된 양식 그대로)
+    const printContent = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="UTF-8">
+        <title>견적서</title>
+        <style>
+          @media print {
+            @page { margin: 15mm; }
+            body { margin: 0; }
+          }
+          * { box-sizing: border-box; }
+          body { 
+            font-family: '맑은 고딕', 'Malgun Gothic', sans-serif; 
+            font-size: 11pt;
+            padding: 10mm;
+          }
+          table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-bottom: 3mm;
+          }
+          td, th { 
+            border: 1px solid #000; 
+            padding: 3px 5px;
+            text-align: center;
+          }
+          .title { 
+            text-align: center; 
+            font-size: 20pt; 
+            font-weight: bold; 
+            letter-spacing: 8px;
+            margin: 10mm 0;
+          }
+          .label { 
+            background: #f0f0f0; 
+            font-weight: bold;
+            width: 15%;
+          }
+          .value {
+            text-align: left;
+            padding-left: 8px;
+          }
+          .header-table td {
+            padding: 5px 8px;
+          }
+          .main-table th {
+            background: #e8e8e8;
+            font-weight: bold;
+            padding: 6px 4px;
+          }
+          .main-table td {
+            padding: 4px;
+          }
+          .category-cell {
+            background: #f5f5f5;
+            font-weight: bold;
+          }
+          .text-left { text-align: left !important; }
+          .text-right { text-align: right !important; }
+          .no-border { border: none !important; }
+          .border-top { border-top: 2px solid #000 !important; }
+        </style>
+      </head>
+      <body>
+        <div class="title">견 적 서</div>
+
+        <!-- 상단 정보 테이블 -->
+        <table class="header-table">
+          <tr>
+            <td class="label" rowspan="3">공급자</td>
+            <td class="value" colspan="3">20${year}년 ${month}월 ${day}일</td>
+            <td class="label">현장명</td>
+            <td class="value" colspan="3">${data.customerAddress || ''}</td>
+          </tr>
+          <tr>
+            <td class="label">공급자</td>
+            <td class="value" colspan="2">대성기획인테리어</td>
+            <td class="label">성명</td>
+            <td class="value" colspan="3">${data.customerName}</td>
+          </tr>
+          <tr>
+            <td class="label">H.P:</td>
+            <td class="value" colspan="2">010-3345-2259</td>
+            <td class="label">담당자</td>
+            <td class="value" colspan="3">${data.customerPhone}</td>
+          </tr>
+          <tr>
+            <td class="label" rowspan="2">수요자</td>
+            <td class="label">공사명</td>
+            <td class="value" colspan="6">${data.customerAddress || ''}</td>
+          </tr>
+          <tr>
+            <td class="label">주소</td>
+            <td class="value" colspan="6">${data.customerAddress || ''}</td>
+          </tr>
+          <tr>
+            <td class="label" rowspan="2">시공내역</td>
+            <td class="label">할인</td>
+            <td colspan="6" class="text-left">
+              1. 할인( &nbsp; ) &nbsp; 2. 조정( &nbsp; ) &nbsp; 3. 인건비( &nbsp; ) &nbsp; 4. 단체비( &nbsp; ) &nbsp; 5. 기타( &nbsp; )
+            </td>
+          </tr>
+          <tr>
+            <td class="label">공종</td>
+            <td colspan="6" class="text-left">ㅁㅁㅁ등</td>
+          </tr>
+        </table>
+
+        <!-- 메인 시공 내역 테이블 -->
+        <table class="main-table">
+          <thead>
+            <tr>
+              <th style="width: 10%;">분류</th>
+              <th style="width: 12%;">공종</th>
+              <th style="width: 23%;">제품군</th>
+              <th style="width: 15%;">모델</th>
+              <th style="width: 10%;">단가</th>
+              <th style="width: 8%;">단위</th>
+              <th style="width: 12%;">금액</th>
+              <th style="width: 10%;">비고</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${generateTableRows(data.items)}
+          </tbody>
+        </table>
+
+        <!-- 하단 금액 정보 -->
+        <table style="margin-top: 10mm;">
+          <tr>
+            <td class="label" style="width: 70%;">공급가액</td>
+            <td class="text-right">${data.supplyAmount}</td>
+          </tr>
+          <tr>
+            <td class="label">부가세 (10%)</td>
+            <td class="text-right">${data.taxAmount}</td>
+          </tr>
+          <tr style="font-weight: bold; font-size: 12pt;">
+            <td class="label border-top">총 금액</td>
+            <td class="text-right border-top">${data.totalAmount}</td>
+          </tr>
+        </table>
+
+        ${data.notes ? `
+        <div style="margin-top: 10mm; padding: 8px; border: 1px solid #000;">
+          <strong>■ 특이사항:</strong><br>
+          ${data.notes.replace(/\n/g, '<br>')}
+        </div>
+        ` : ''}
+
+        <!-- 회사 정보 -->
+        <div style="margin-top: 15mm; text-align: center; font-size: 10pt;">
+          <div style="font-weight: bold; font-size: 14pt; margin-bottom: 5mm;">대성기획인테리어</div>
+          <div>대표자: 윤영권 | 사업자등록번호: 612-59-01057</div>
+          <div>주소: 경기도 고양시 일산동구 백석로85번길 19-11, 3층(백석동)</div>
+          <div>연락처: 010-3345-2259 | 이메일: yyk2400@naver.com</div>
+        </div>
+      </body>
+      </html>
+    `;
+
+    // 임시 iframe 생성 및 인쇄
+    const iframe = document.createElement('iframe');
+    iframe.style.position = 'absolute';
+    iframe.style.width = '0';
+    iframe.style.height = '0';
+    iframe.style.border = 'none';
+    iframe.style.visibility = 'hidden';
+    document.body.appendChild(iframe);
+
+    const iframeDoc = iframe.contentWindow.document;
+    iframeDoc.open();
+    iframeDoc.write(printContent);
+    iframeDoc.close();
+
+    // 확실하게 로드 후 인쇄 (두 가지 방법 모두 사용)
+    setTimeout(() => {
+      try {
+        iframe.contentWindow.focus();
+        iframe.contentWindow.print();
+        
+        // 인쇄 완료 후 iframe 제거
+        setTimeout(() => {
+          if(iframe.parentNode) {
+            document.body.removeChild(iframe);
+          }
+        }, 2000);
+      } catch(e) {
+        console.error('인쇄 오류:', e);
+        alert('인쇄 중 오류가 발생했습니다. 브라우저 설정을 확인해주세요.');
+        if(iframe.parentNode) {
+          document.body.removeChild(iframe);
+        }
+      }
+    }, 500);
+  }
+
+  // 테이블 행 생성 함수
+  function generateTableRows(items) {
+    if(!items || items.length === 0) {
+      return '<tr><td colspan="8">항목이 없습니다.</td></tr>';
+    }
+
+    let rows = '';
+    let currentCategory = '';
+    
+    items.forEach((item, index) => {
+      // 분류 셀 (첫 항목이거나 이전과 다를 때만 표시)
+      const categoryCell = (index === 0 || item.category !== currentCategory) 
+        ? `<td class="category-cell" rowspan="1">${item.name || '기타공사'}</td>` 
+        : '';
+      
+      if(categoryCell) currentCategory = item.category;
+
+      rows += `
+        <tr>
+          ${categoryCell}
+          <td class="text-left">${item.name || ''}</td>
+          <td class="text-left">${item.spec || ''}</td>
+          <td>${item.spec || ''}</td>
+          <td class="text-right">${item.price ? item.price.toLocaleString() : ''}</td>
+          <td>${item.qty ? '식' : ''}</td>
+          <td class="text-right">${item.total ? item.total.toLocaleString() : ''}</td>
+          <td></td>
+        </tr>
+      `;
+    });
+
+    return rows;
+  }
+
 </script></body>
 </html>
